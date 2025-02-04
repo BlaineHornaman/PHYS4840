@@ -1,0 +1,27 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import my_functions_lib as mfl
+import numpy as np
+
+x = np.linspace(1, 100, 500)
+y = mfl.y(x)
+
+#Linear plot
+plt.plot(x, y)
+plt.grid(True)
+plt.show()
+plt.close()
+
+#log-log plot
+plt.plot(x, y)
+plt.xscale('log')
+plt.yscale('log')
+plt.grid(True)
+plt.show()
+plt.close()
+
+#log(x) vs log(y) plot
+plt.plot(np.log10(x), np.log10(y))
+plt.grid(True)
+plt.show()
+plt.close()
