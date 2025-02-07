@@ -1,0 +1,12 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import sys
+
+sys.path.append('..?')
+
+filename = 'NGC6341.dat'
+
+blue, green, red = np.loadtxt(filename, usecols = (8, 14, 26), unpack = True)
+
+plt.plot()
+plt.show()
