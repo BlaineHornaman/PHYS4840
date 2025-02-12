@@ -1,0 +1,42 @@
+#Homework 2 Problem 2
+#Author: Blaine Hornaman
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Define the function and domain
+x = np.linspace(-100, 100, 500)
+y = x**4
+log_y = np.log10(y)
+
+# Create the figure and subplots
+fig, axs = plt.subplots(1, 3, figsize=(18, 6))
+
+# Plot on a linear grid
+axs[0].plot(x, y, color='b', marker='o', linestyle='-', label='y = x^4')
+axs[0].set_title('Linear Grid')
+axs[0].set_xlabel('x')
+axs[0].set_ylabel('y')
+axs[0].grid(True)
+
+# Plot on a log-log grid
+axs[1].loglog(x[x > 0], y[x > 0], color='g', marker='x', linestyle='--', label='y = x^4 (Log-Log)')
+axs[1].set_title('Log-Log Grid')
+axs[1].set_xlabel('log(x)')
+axs[1].set_ylabel('log(y)')
+axs[1].grid(True)
+
+# Plot the log(base 10) of the function on a linear grid
+axs[2].plot(x, log_y, color='r', marker='s', linestyle='-.', label='log10(y) = log10(x^4)')
+axs[2].set_title('Linear Grid of log10(y)')
+axs[2].set_xlabel('x')
+axs[2].set_ylabel('log10(y)')
+axs[2].grid(True)
+
+# Set labels and legends
+for ax in axs:
+    ax.label_outer()
+    ax.legend(loc='best', fontsize='small')
+
+plt.tight_layout()
+plt.show()
