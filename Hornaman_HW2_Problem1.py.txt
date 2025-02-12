@@ -1,0 +1,14 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+filename_1 = 'MIST_v1.2_feh_m1.75_afe_p0.0_vvcrit0.4_HST_WFPC2.iso.cmd '
+file_data_1 = pd.read_csv(filename_1, delim_whitespace=True, comment='#')
+
+filename_2 = '/mnt/c/Users/blain/OneDrive/Pictures/compphys2/venv/Lab_2/NGC6341.dat'
+file_data_2 = pd.read_csv(filename_2)
+
+plt.plot(file_data_2, file_data_1)
+
+plt.legend()
+plt.gca().invert_yaxis() 
+plt.show()
