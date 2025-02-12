@@ -1,0 +1,35 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+data = np.loadtxt('sunspots.txt')
+months = data[:, 0]
+sunspots = data[:, 1]
+
+plt.figure(figsize = (10, 5))
+plt.plot(months, sunspots, label = 'Sunspots')
+plt.xlabel('Month')
+plt.ylabel('Number of Sunspots')
+plt.title('Monthly Sunspot Numbers')
+plt.legend()
+plt.show()
+
+plt.figure(figsize = (10, 5))
+plt.plot(months[:1000], sunspots[:1000], label = 'First 1000 Sunspots')
+plt.xlabel('Month')
+plt.ylabel('Number of Sunspots')
+plt.title('Monthly Sunspot Numbers (First 1000 Points)')
+plt.legend()
+plt.show()
+
+r = 5
+window_size = 2 * r + 1
+running_avg = np.convolve(sunspots, np.ones(window_size)/window_size, mode = 'valid')
+
+plt.figure(figsize = (10, 5))
+plt.plot(months[:1000], sunspots[:1000], label = 'First 1000 Sunspots')
+plt.plot(months[r:1000-r], running_avg[:1000-2*r], label = 'Running Average')
+plt.xlabel('Month')
+plt.ylabel('Number of Sunspots')
+plt.title('Monthly Sunspot Numbers with Running Average')
+plt.legend()
+plt.show()
