@@ -1,0 +1,30 @@
+# Problem 5.15
+# Author: Blaine Hornaman
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+h = 1e-10
+x = np.linspace(-2, 2, 100)
+
+# Part a
+def f(x):
+    f = 1 + 0.5 * np.tanh(2 * x)
+    return f
+
+def central_difference_derivative(f, x, h):
+    d = (f(x + h) - f(x - h)) / (2 * h)
+    return d
+
+# Part b
+def analytic_derivative_f(x):
+    return np.cosh(2 * x) ** -2
+
+# Part c
+plt.plot(x, central_difference_derivative(f, x, h), 'o', label='Numerical Derivative')
+plt.plot(x, analytic_derivative_f(x), '-', label='Analytic Derivative')
+plt.legend()
+plt.xlabel('x')
+plt.ylabel("f'(x)")
+plt.title('Comparison of Numerical and Analytic Derivatives')
+plt.show()
