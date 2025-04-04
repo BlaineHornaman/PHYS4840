@@ -1,0 +1,70 @@
+#!/usr/bin/python3.12
+# Example 8.2
+# Author: Blaine Hornaman
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def f(x, t):
+    return -x ** 3 + np.sin(t)
+
+t0 = 10
+t_end = 0
+x = 1
+
+N1 = 10
+N2 = 20
+N3 = 50
+N4 = 100
+
+h1 = (t0 - t_end) / (N1)
+h2 = (t0 - t_end) / (N2)
+h3 = (t0 - t_end) / (N3)
+h4 = (t0 - t_end) / (N4)
+
+tpoints1 = np.arange(t_end, t0, h1)
+tpoints2 = np.arange(t_end, t0, h2)
+tpoints3 = np.arange(t_end, t0, h3)
+tpoints4 = np.arange(t_end, t0, h4)
+
+xpoints1 = []
+xpoints2 = []
+xpoints3 = []
+xpoints4 = []
+
+for t in tpoints1:
+    xpoints1.append(x)
+    k1_1 = h1 * f(x, t)
+    k2_1 = h1 * f(x + 0.5 * k1_1, t + 0.5 * h1)
+    
+    x += k2_1
+    
+for t in tpoints2:
+    xpoints2.append(x)
+    k1_2 = h2 * f(x, t)
+    k2_2 = h2 * f(x + 0.5 * k1_2, t + 0.5 * h2)
+    
+    x += k2_2
+    
+for t in tpoints3:
+    xpoints3.append(x)
+    k1_3 = h3 * f(x, t)
+    k2_3 = h3 * f(x + 0.5 * k1_3, t + 0.5 * h3)
+    
+    x += k2_3
+    
+for t in tpoints4:
+    xpoints4.append(x)
+    k1_4 = h4 * f(x, t)
+    k2_4 = h4 * f(x + 0.5 * k1_4, t + 0.5 * h4)
+    
+    x += k2_4
+
+plt.plot(tpoints1, xpoints1)
+plt.plot(tpoints2, xpoints2)
+plt.plot(tpoints3, xpoints3)
+plt.plot(tpoints4, xpoints4)
+plt.xlabel('x')
+plt.ylabel('x(t)')
+plt.show()

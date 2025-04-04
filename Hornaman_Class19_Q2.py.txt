@@ -1,0 +1,77 @@
+#!/usr/bin/python3.12
+# Example 8.3
+# Author: Blaine Hornaman
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(x, t):
+    return -x ** 3 + np.sin(t)
+
+t0 = 0
+t_end = 10
+x = 1
+
+N1 = 10
+N2 = 20
+N3 = 50
+N4 = 100
+
+h1 = (t_end - t0) / (N1)
+h2 = (t_end - t0) / (N2)
+h3 = (t_end - t0) / (N3)
+h4 = (t_end - t0) / (N4)
+
+tpoints1 = np.arange(t0, t_end, h1)
+tpoints2 = np.arange(t0, t_end, h2)
+tpoints3 = np.arange(t0, t_end, h3)
+tpoints4 = np.arange(t0, t_end, h4)
+
+xpoints1 = []
+xpoints2 = []
+xpoints3 = []
+xpoints4 = []
+
+for t in tpoints1:
+    xpoints1.append(x)
+    k1_1 = h1 * f(x, t)
+    k2_1 = h1 * f(x + 0.5 * k1_1, t + 0.5 * h1)
+    k3_1 = h1 * f(x + 0.5 * k2_1, t + 0.5 * h1)
+    k4_1 = h1 * f(x + k3_1, t + h1)
+    
+    x += (k1_1 + 2 * k2_1 + 2 * k3_1 + k4_1) / 6
+    
+for t in tpoints2:
+    xpoints2.append(x)
+    k1_2 = h2 * f(x, t)
+    k2_2 = h2 * f(x + 0.5 * k1_2, t + 0.5 * h2)
+    k3_2 = h2 * f(x + 0.5 * k2_2, t + 0.5 * h2)
+    k4_2 = h2 * f(x + k3_2, t + h2)
+    
+    x += (k1_2 + 2 * k2_2 + 2 * k3_2 + k4_2) / 6
+    
+for t in tpoints3:
+    xpoints3.append(x)
+    k1_3 = h3 * f(x, t)
+    k2_3 = h3 * f(x + 0.5 * k1_3, t + 0.5 * h3)
+    k3_3 = h3 * f(x + 0.5 * k2_3, t + 0.5 * h3)
+    k4_3 = h3 * f(x + k3_3, t + h3)
+    
+    x += (k1_3 + 2 * k2_3 + 2 * k3_3 + k4_3) / 6
+    
+for t in tpoints4:
+    xpoints4.append(x)
+    k1_4 = h4 * f(x, t)
+    k2_4 = h4 * f(x + 0.5 * k1_4, t + 0.5 * h4)
+    k3_4 = h4 * f(x + 0.5 * k2_4, t + 0.5 * h4)
+    k4_4 = h4 * f(x + k3_4, t + h4)
+    
+    x += (k1_4 + 2 * k2_4 + 2 * k3_4 + k4_4) / 6
+
+plt.plot(tpoints1, xpoints1)
+plt.plot(tpoints2, xpoints2)
+plt.plot(tpoints3, xpoints3)
+plt.plot(tpoints4, xpoints4)
+plt.xlabel('x')
+plt.ylabel('x(t)')
+plt.savefig('Class19_Exercise8.3.png')
